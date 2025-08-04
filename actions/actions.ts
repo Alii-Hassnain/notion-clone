@@ -2,7 +2,6 @@
 import { adminDb } from "@/Firebase-admin";
 import { auth } from "@clerk/nextjs/server";
 export async function createNewDocument() {
-  
   const { sessionClaims } = await auth();
   const docCollectionRef = adminDb.collection("documents");
   const docRef = await docCollectionRef.add({
