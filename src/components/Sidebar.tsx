@@ -2,10 +2,23 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, File, PlusCircle } from "lucide-react";
-import React from 'react'
+import React, { useEffect } from 'react'
 import NewDocumentButton from "./NewDocumentButton";
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { useUser } from "@clerk/nextjs";
+import { collectionGroup, DocumentData, query, where } from "firebase/firestore";
+import { db } from "@/Firebase";
+
+
+interface RoomDocument extends DocumentData {
+  createdAt:string;
+  role:"Owner" | "editor";
+  roomId:string;
+  userId:string;
+}
 
 const Sidebar = () => {
+  
 
   const menuOptions = (
    <>
