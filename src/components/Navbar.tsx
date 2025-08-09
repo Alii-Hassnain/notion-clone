@@ -7,7 +7,7 @@ import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } 
 const Navbar = () => {
   const { user } = useUser();
   return (
-    <nav className="w-full h-14 bg-white border-b shadow-sm px-4 flex items-center justify-between relative">
+    <nav className="w-full h-14 bg-white shadow-sm px-4 flex items-center justify-between relative">
       {user ? (
         <h1 className="font-semibold">
           {user?.firstName}

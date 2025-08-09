@@ -9,7 +9,6 @@ createNewDocument
 const NewDocumentButton = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter()
-  
   const handleCreateNewDocument = () =>{
     startTransition(async ()=>{
        const docId = await createNewDocument(); 
@@ -17,8 +16,8 @@ const NewDocumentButton = () => {
     })
   }
   return (
-    <div className='flex justify-center p-4'>
-      <Button className='cursor-pointer' onClick={handleCreateNewDocument} disabled={isPending}>{isPending ? "Creating":"new Document"}</Button>
+    <div >
+      <Button className='cursor-pointer bg-amber-200' onClick={handleCreateNewDocument} disabled={isPending}>{isPending ? "Creating":"new Document"}</Button>
     </div>
   )
 }

@@ -22,7 +22,7 @@ const createNewDocument = async () => {
     .doc(docRef.id)
     .set({
       roomId: docRef.id,
-      role: "Owner",
+      role: "Editor",
       userId: email,
       createdAt: new Date(),
     } as RoomDocument);

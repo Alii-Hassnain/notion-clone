@@ -2,39 +2,21 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, File, PlusCircle } from "lucide-react";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from "react";
 import NewDocumentButton from "./NewDocumentButton";
-import { useCollection } from 'react-firebase-hooks/firestore';
-import { useUser } from "@clerk/nextjs";
-import { collectionGroup, DocumentData, query, where } from "firebase/firestore";
-import { db } from "@/Firebase";
-
-
-interface RoomDocument extends DocumentData {
-  createdAt:string;
-  role:"Owner" | "editor";
-  roomId:string;
-  userId:string;
-}
+import SidebarOptions from "./sidebarOptions";
 
 const Sidebar = () => {
-  
-
   const menuOptions = (
-   <>
-     <NewDocumentButton/>
-     {/* my documents */}
-
-     {/* list */}
-
-     {/* Share with me */}
-
-     {/* List */}
-   </>
-   
-  
-   
-  )
+    <div className="flex justify-center items-center flex-col gap-5">
+      {/* my documents */}
+      <NewDocumentButton />
+      {/* list */}
+      <SidebarOptions/>
+      {/* Share with me */}
+      {/* List */}  
+    </div>
+  );
   return (
     <div className="md:w-64 w-full">
       {/* Mobile Button */}
@@ -52,30 +34,9 @@ const Sidebar = () => {
       </div>
 
       {/* desktop button */}
-      <div className="hidden md:block p-4">
-        {menuOptions}
-      </div>
+      <div className="hidden md:block p-4">{menuOptions}</div>
     </div>
-  )
-}
+  );
+};
 
-// function SidebarContent() {
-//   return (
-//     <div className="space-y-4">
-//       <NewDocumentButton/>
-//       <ul className="space-y-2">
-//         <li className="flex items-center gap-2 cursor-pointer hover:bg-muted p-2 rounded">
-//           <File className="w-4 h-4" /> Page 1
-//         </li>
-//         <li className="flex items-center gap-2 cursor-pointer hover:bg-muted p-2 rounded">
-//           <File className="w-4 h-4" /> Page 2
-//         </li>
-//       </ul>
-//       <Button variant="outline" className="w-full flex items-center gap-2">
-//         <PlusCircle className="w-4 h-4" /> New Page
-//       </Button>
-//     </div>
-//   );
-// }
-
-export default Sidebar
+export default Sidebar;
