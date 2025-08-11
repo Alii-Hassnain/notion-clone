@@ -1,5 +1,4 @@
 "use server";
-
 import { adminDb } from "@/Firebase-admin";
 import { auth } from "@clerk/nextjs/server";
 import { RoomDocument } from "../types/types";
