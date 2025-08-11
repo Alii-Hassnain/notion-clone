@@ -49,15 +49,15 @@ const SidebarOptions = () => {
     setOwnerEditor(groupedData);
     console.log(groupedData);
   }, [snapshot]);
-  useEffect(() => {
-    const idFromPath = pathName.split("/doc/")[1];
-    if (idFromPath) setDocId(idFromPath);
-  }, [pathName]);
-  const [activeSnapshot, activeLoading, activeError] = useDocument(
-    docId ? doc(db, "documents", docId) : null
-  );
-  if (activeLoading) return <h1>loading..</h1>;
-  const activeTitle = activeSnapshot?.data()?.title;
+  // useEffect(() => {
+  //   const idFromPath = pathName.split("/doc/")[1];
+  //   if (idFromPath) setDocId(idFromPath);
+  // }, [pathName]);
+  // const [activeSnapshot, activeLoading, activeError] = useDocument(
+  //   docId ? doc(db, "documents", docId) : null
+  // );
+  // if (activeLoading) return <h1>loading..</h1>;
+  // const activeTitle = activeSnapshot?.data()?.title;
 
   // just for the test..........................
 
