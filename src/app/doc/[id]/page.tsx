@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import BreadCrumbs from "@/components/breadCrumbs";
 import { Button } from "@/components/ui/button";
 import { useDocument } from "react-firebase-hooks/firestore";
-import db from "../../../Firebase";
+
 import { doc, updateDoc } from "firebase/firestore";
 
 const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
