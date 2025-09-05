@@ -17,7 +17,7 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
   const documentData = snapshot?.data();
   async function handleUpdate() {
     if (!title.trim()) return; // prevent empty update
-    const docRef = doc(db, "documents", id);
+    // const docRef = doc(db, "documents", id);
     await updateDoc(docRef, { title });
     setTitle(""); // clear input after update
   }

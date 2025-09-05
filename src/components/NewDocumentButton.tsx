@@ -3,14 +3,18 @@ import React from 'react'
 import { Button } from './ui/button'
 import { useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import createNewDocument from '../../actions/createNewDocument'
+import { createNewDocumentAction } from '../../actions/createNewDocument'
+// import createNewDocument from '../../actions/createNewDocument'
 // import { createNewDocument } from '../../actions/actions'
+
+
 const NewDocumentButton = () => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter()
   const handleCreateNewDocument = () =>{
     startTransition(async ()=>{
-       const docId = await createNewDocument(); 
+       const {docId} = await createNewDocumentAction();
+       console.log(docId);
        router.push(`/doc/${docId}`)
     })
   }

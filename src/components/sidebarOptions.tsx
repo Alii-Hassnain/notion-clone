@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
 import Link from "next/link";
-import db from "../Firebase";
+
 import {
   collection,
   doc,
@@ -28,7 +28,7 @@ const SidebarOptions = () => {
   const { user } = useUser(); // Add isLoaded to know when Clerk is ready
   const email = user?.emailAddresses[0]?.emailAddress;
   const [snapshot, loading, error] = useCollection(
-    email ? query(collection(db, "users", email, "rooms")) : null
+    // email ? query(collection(db, "users", email, "rooms")) : null
   );
   useEffect(() => {
     if (!snapshot) return;
