@@ -4,7 +4,7 @@ export type User = {
     email:string,
     image:string
 }
-export interface RoomDocument extends DocumentData{
+export interface RoomDocument{
     createdAt:Date;
     role:"Owner"| "Editor";
     roomId:string;
