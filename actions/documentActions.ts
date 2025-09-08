@@ -1,15 +1,8 @@
 "use server";
 import { supabaseServer } from "@/lib/supaBaseClient";
 
-type Doc = {
-  id:number;
-  title: string;
-  role:"owner" | "editor";
-  room:number
-}
 
 export async function getDocument(userId: string) {
-
   const { data, error, status } = await supabaseServer
   .from("documents")
   .select(`
@@ -18,9 +11,6 @@ export async function getDocument(userId: string) {
     `)
     .eq("created_by", userId);
   if (error) throw new Error(error.message);
-
-   console.log("this is the log",data);
-
    const transformed = data?.map((doc)=>({
     id:doc.id,
     title:doc.title,
@@ -32,4 +22,31 @@ export async function getDocument(userId: string) {
     data:transformed,
     status,
   };
+}
+
+export async function getDocumnetTitle(docId:string){
+  const {data , error , status } = await supabaseServer
+  .from("documents")
+  .select('title')
+  .eq("id",docId)
+  .single()
+  if (error) throw new Error(error.message)
+    console.log("single document data = " , data.title);
+    return {
+      title : data.title
+    }
+}
+
+export async function setDocumentTitle(title:string , docId:string){
+  const {data , error } = await supabaseServer
+  .from("documents")
+  .update({title})
+  .eq("id",docId)
+  .select("title")
+  .single();
+
+  if(error) throw new Error(error.message)  
+    return {
+      title : data.title
+    }
 }

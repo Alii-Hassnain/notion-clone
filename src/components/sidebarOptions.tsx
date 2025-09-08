@@ -2,11 +2,12 @@ import React, { use, useEffect, useLayoutEffect, useMemo, useState } from "react
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import { RoomDocument } from "../../types/types";
 import SideBarContent from "./SideBarContent";
 
 // server actions
 import { getDocument } from "../../actions/documentActions";
+import useSWR from "swr";
+
 
 type Documents = {
   id: number;
@@ -14,16 +15,12 @@ type Documents = {
   roomId: number;
   title: string;
 };
-
 const SidebarOptions = () => {
   const [gData, setGdata] = useState<Documents[]>([]);
   const pathName = usePathname();
   const { user, isLoaded } = useUser(); // Add isLoaded to know when Clerk is ready
   // const email = user?.emailAddresses[0]?.emailAddress;
   const userId = user?.id;
-
-
-
   useEffect(()=>{
      if (!isLoaded || !userId) return;
     const fetchData = async () => {
@@ -34,7 +31,6 @@ const SidebarOptions = () => {
       setGdata(data);
     };
     fetchData();
-
   },[userId,isLoaded])
 
   const ownerEditor = useMemo(()=>{
@@ -49,23 +45,18 @@ const SidebarOptions = () => {
       owner:[],
       editor:[]
     })
-
     return groupedData
   },[gData])
-
-  console.log(ownerEditor);
-  
-
+console.log(ownerEditor);
 const DocList = ({docs}:{docs:Documents[]})=>{
   if(!docs) throw new Error("Document is empty");
     return(
       <ul className="flex flex-col gap-2">
-        {docs.map((data) => {
-          
-          const isActive = pathName === `/doc/${data.roomId}`;
+        {docs.map((data) => {      
+          const isActive = pathName === `/doc/${data.id}`;
           console.log(pathName);
           return (
-            <Link href={`/doc/${data.roomId}`} key={data.id}>
+            <Link href={`/doc/${data.id}`} key={data.id}>
               <li
                 className={`p-2 hover:bg-gray-100 rounded cursor-pointer  ${
                   isActive ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"
@@ -79,16 +70,13 @@ const DocList = ({docs}:{docs:Documents[]})=>{
       </ul>
     )
 }
-
-    return(
-      <>
-        <DocList docs={ownerEditor.owner}/>
-
-        <h1 className="text-gray-500">Shared with me</h1>
-        <DocList docs={ownerEditor.editor}/>
-      </>
-    )
-
+  return(
+    <>
+      <DocList docs={ownerEditor.owner}/>
+      <h1 className="text-gray-500">Shared with me</h1>
+      <DocList docs={ownerEditor.editor}/>
+    </>
+  )
 };
 
 export default SidebarOptions;

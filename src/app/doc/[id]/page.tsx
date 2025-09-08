@@ -1,25 +1,28 @@
 "use client";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import BreadCrumbs from "@/components/breadCrumbs";
 import { Button } from "@/components/ui/button";
-import { useDocument } from "react-firebase-hooks/firestore";
-
-import { doc, updateDoc } from "firebase/firestore";
+import { getDocumnetTitle, setDocumentTitle } from "../../../../actions/documentActions";
 
 const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
+
   const { id } = use(params);
-  const [title, setTitle] = useState("");
-  const [snapshot, loading, error] = useDocument(doc(db, "documents", id));
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;  
-  const documentData = snapshot?.data();
+  const [title, setTitle] = useState<string>("");
+  useEffect(()=>{
+    if(!id) return
+    const fetch = async ()=>{
+      const {title} = await getDocumnetTitle(id); 
+      setTitle(title)
+    }
+    fetch();
+  },[id])
+  console.log("This is the title = ",title);
   async function handleUpdate() {
     if (!title.trim()) return; // prevent empty update
-    // const docRef = doc(db, "documents", id);
-    await updateDoc(docRef, { title });
-    setTitle(""); // clear input after update
+    const data = await setDocumentTitle(title, id)
+    setTitle(data.title); // clear input after update
+    
   }
   return (
     <div>
@@ -32,7 +35,7 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder={documentData?.title}
+            placeholder={title}
           />
           <Button
             onClick={handleUpdate}
