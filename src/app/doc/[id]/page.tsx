@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import BreadCrumbs from "@/components/breadCrumbs";
 import { Button } from "@/components/ui/button";
 import { getDocumnetTitle, setDocumentTitle } from "../../../../actions/documentActions";
+import { Room } from "@/app/room";
+import { Editor } from "@/components/LiveBlocksComponent/Editor";
 
 const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
-
   const { id } = use(params);
   const [title, setTitle] = useState<string>("");
   useEffect(()=>{
@@ -22,9 +23,9 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
     if (!title.trim()) return; // prevent empty update
     const data = await setDocumentTitle(title, id)
     setTitle(data.title); // clear input after update
-    
   }
   return (
+    <Room>
     <div>
       <div className="flex justify-center">
         <BreadCrumbs id={id} />
@@ -45,7 +46,10 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
           </Button>
         </div>
       </div>
-    </div>
+      </div>
+
+      <Editor/>
+    </Room>
   );
 };
 
