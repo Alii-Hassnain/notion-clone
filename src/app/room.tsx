@@ -12,10 +12,11 @@ import {
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
 
-export function Room({ children }: { children: ReactNode }) {
+export function Room({id ,  children }: {id:string; children: ReactNode }) {
   return (
-    <LiveblocksProvider publicApiKey={"pk_dev_qD8od_v2TP-I-96KHxcy7p77SWjboojBzZpreI9q5v7_Gns_X1d0onPn1MR9Dpy-"}>
-      <RoomProvider id="my-room">
+    // <LiveblocksProvider publicApiKey={"pk_dev_qD8od_v2TP-I-96KHxcy7p77SWjboojBzZpreI9q5v7_Gns_X1d0onPn1MR9Dpy-"}>
+    <LiveblocksProvider authEndpoint="/api/liveblocks-auth">
+      <RoomProvider id={id}>
         <ClientSideSuspense fallback={<div>Loading…</div>}>
           {children}
         </ClientSideSuspense>
