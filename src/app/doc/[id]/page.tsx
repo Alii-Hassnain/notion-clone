@@ -9,7 +9,9 @@ import {
 } from "../../../../actions/documentActions";
 import { Room } from "@/app/room";
 import { Editor } from "@/components/LiveBlocksComponent/Editor";
-// import { RoomProvider } from "@liveblocks/react";
+
+
+
 
 const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = use(params);
@@ -29,10 +31,10 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
     setTitle(data.title); // clear input after update
   }
 
-  
+  // const others = useOthers();
   return (
     <Room id = {id}>
-      <div>
+    <div className="my-5">
         <div className="flex justify-center">
           <BreadCrumbs id={id} />
         </div>
@@ -51,6 +53,8 @@ const Documents = ({ params }: { params: Promise<{ id: string }> }) => {
               Edit
             </Button>
 
+            {/* <div>Online (not you): {others.length}</div>; */}
+    
           </div>
         </div>
       </div>

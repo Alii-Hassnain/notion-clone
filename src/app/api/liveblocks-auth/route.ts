@@ -19,7 +19,7 @@ export async function POST(){
     // const rNum = Math.random().toString(36).slice(2);
     const r = Math.floor(Math.random() * 10);
     const avatar = user?.imageUrl ?? "https://i.pravatar.cc/98";
-    const color = "#6ee7b7";
+    const color = "#6ee7b4";
     const session = liveblocks.prepareSession(userId,{
         userInfo: {name , avatar , color},
     });
