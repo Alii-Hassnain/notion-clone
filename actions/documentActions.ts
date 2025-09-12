@@ -1,13 +1,12 @@
 "use server";
 import { supabaseServer } from "@/lib/supaBaseClient";
 
-
 export async function getDocument(userId: string) {
   const { data, error, status } = await supabaseServer
   .from("documents")
   .select(`
       id,title,room_id,
-      role:document_roles(user_id,role)
+      role:document_roles!right(user_id,role)
     `)
     .eq("created_by", userId);
   if (error) throw new Error(error.message);

@@ -13,6 +13,7 @@ import {
 } from "@liveblocks/react/suspense";
 import { resolveUsersSA, searchUsersSA } from "../../actions/userDirectory";
 import { text } from "stream/consumers";
+import ShareDocument from "@/components/ShareDocument";
 
 
 
@@ -42,7 +43,10 @@ export function Room({id ,  children }: {id:string; children: ReactNode }) {
     >
       <RoomProvider id={id}>
         <ClientSideSuspense fallback={<div>Keep patience ...</div>}>
-          <Who /> 
+          <div className="flex justify-between">
+            <Who /> 
+            <ShareDocument docId = {id}/>
+          </div>
           {children}
         </ClientSideSuspense>
       </RoomProvider>

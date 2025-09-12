@@ -73,7 +73,7 @@ const DocList = ({docs}:{docs:Documents[]})=>{
   return(
     <>
       <DocList docs={ownerEditor.owner}/>
-      <h1 className="text-gray-500">Shared with me</h1>
+        <h1 className="text-gray-500">Shared</h1>
       <DocList docs={ownerEditor.editor}/>
     </>
   )
