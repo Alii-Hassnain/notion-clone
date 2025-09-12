@@ -6,7 +6,7 @@ import {
 } from "@liveblocks/react-blocknote";
 import { BlockNoteEditor } from "@blocknote/core";
 
-export function Threads({ editor }: { editor: BlockNoteEditor | null }) {
+export function Threads({ editor }: { editor: BlockNoteEditor | any }) {
   const { threads } = useThreads({ query: { resolved: false } });
 
   if (!editor) {
