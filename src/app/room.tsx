@@ -12,7 +12,6 @@ import {
   ClientSideSuspense,
 } from "@liveblocks/react/suspense";
 import { resolveUsersSA, searchUsersSA } from "../../actions/userDirectory";
-import { text } from "stream/consumers";
 import ShareDocument from "@/components/ShareDocument";
 
 

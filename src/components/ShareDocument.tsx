@@ -17,6 +17,8 @@ const ShareDocument = ({docId} : {docId:string}) => {
         if(!email || !docId) throw new Error("email and docId is missing");
         const data = await findUserByEmail(email , docId);
         console.log("Inviting" , email);
+        console.log(data);
+        
     }
   return (
     <div>
