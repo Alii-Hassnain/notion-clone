@@ -18,23 +18,22 @@ const Sidebar = () => {
     </div>
   );
   return (
-    <div className="md:w-64 w-full">
-      {/* Mobile Button */}
-      <div className="md:hidden p-2 border-b">
+    <div>
+      <div>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="sm">
+            <Button className="md:hidden" variant="outline" size="sm">
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-64">
+          <SheetContent side="left" className="w-64 bg-amber-50">
             {menuOptions}
           </SheetContent>
         </Sheet>
       </div>
-
-      {/* desktop button */}
-      <div className="hidden md:block p-4">{menuOptions}</div>
+      <div className="hidden md:block p-8">  
+        {menuOptions}
+      </div>
     </div>
   );
 };
