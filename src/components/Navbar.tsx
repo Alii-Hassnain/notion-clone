@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { User } from "lucide-react";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 const Navbar = () => {
   const { user } = useUser();
   return (

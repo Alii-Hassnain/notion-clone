@@ -2,16 +2,14 @@ import React, { use, useEffect, useLayoutEffect, useMemo, useState } from "react
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
-import SideBarContent from "./SideBarContent";
-
 // server actions
 import { getDocument } from "../../actions/documentActions";
-import useSWR from "swr";
 
+type Role = "owner" | "editor"
 
 type Documents = {
   id: number;
-  role: "owner" | "editor";
+  role: Array<{role:Role}>;
   roomId: number;
   title: string;
 };
@@ -32,19 +30,21 @@ const SidebarOptions = () => {
     };
     fetchData();
   },[userId,isLoaded])
-
   const ownerEditor = useMemo(()=>{
     if(!gData) return { owner:[], editor:[]};
     const groupedData = gData?.reduce<{
       owner:Documents[],
       editor:Documents[]
     }>((bag,item)=>{
-      bag[item.role].push(item);
+      item.role.forEach((r)=>{
+        bag[r.role].push(item);
+      })
       return bag;
     },{
       owner:[],
       editor:[]
     })
+    console.log(groupedData);
     return groupedData
   },[gData])
 console.log(ownerEditor);
@@ -73,7 +73,7 @@ const DocList = ({docs}:{docs:Documents[]})=>{
   return(
     <>
       <DocList docs={ownerEditor.owner}/>
-        <h1 className="text-gray-500">Shared</h1>
+        <h1 className="text-gray-500">Shared with me</h1>
       <DocList docs={ownerEditor.editor}/>
     </>
   )

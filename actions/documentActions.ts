@@ -6,16 +6,26 @@ export async function getDocument(userId: string) {
   .from("documents")
   .select(`
       id,title,room_id,
-      role:document_roles!right(user_id,role)
+      role:document_roles!inner(user_id,role)
     `)
-    .eq("created_by", userId);
+    .eq("document_roles.user_id", userId);
   if (error) throw new Error(error.message);
+
+
+  console.log(data);
+  console.log(data[0]);
+  
+  
    const transformed = data?.map((doc)=>({
     id:doc.id,
     title:doc.title,
     roomId:doc.room_id,
-    role:doc.role?.[0]?.role ?? null,
+    role:doc.role.map((doc)=>({
+      role:doc.role
+    })),
    }));
+   
+   
    
   return {
     data:transformed,

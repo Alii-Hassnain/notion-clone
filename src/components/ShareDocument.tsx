@@ -7,10 +7,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button, buttonVariants } from "./ui/button";
+import { Button} from "./ui/button";
 import { Input } from "@/components/ui/input";
 import { findUserByEmail } from "../../actions/userActions";
-const ShareDocument = ({docId} : {docId:number}) => {
+const ShareDocument = ({docId} : {docId:string}) => {
     const emailRef = useRef<HTMLInputElement>(null);
     const handleAdd = async () =>{
         const email = emailRef?.current?.value;

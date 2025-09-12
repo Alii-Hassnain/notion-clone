@@ -1,8 +1,8 @@
 "use client";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, File, PlusCircle } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Menu} from "lucide-react";
+import React from "react";
 import NewDocumentButton from "./NewDocumentButton";
 import SidebarOptions from "./sidebarOptions";
 

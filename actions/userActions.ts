@@ -2,19 +2,15 @@
 
 import { supabaseServer } from "@/lib/supaBaseClient"; 
 
-
-export async function findUserByEmail(email: string , docId : number) {
+export async function findUserByEmail(email: string , docId : string) {
   if (!email) return null;
-
   const { data:user, error:userErr } = await supabaseServer
     .from("users")           // 👈 your table name (adjust if different)
     .select("*")
     .eq("email", email.trim().toLowerCase())
     .single();
     if(userErr || !user) throw new Error(userErr?.message || "User not found")
-
         console.log(user);
-        
     const userId = user?.id;
     const {data:roleRows , error:roleErr}  = await supabaseServer
     .from("document_roles")
@@ -24,7 +20,6 @@ export async function findUserByEmail(email: string , docId : number) {
     )
     .select();
     if(roleErr) throw new Error(roleErr.message);
-
   return {
     user,
     role:roleRows?.[0] ?? null,

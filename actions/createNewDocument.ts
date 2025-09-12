@@ -15,7 +15,6 @@ export async function createNewDocumentAction() {
 
   const {
     data: room,
-    status: rStatus,
     error: rErr,
   } = await supabaseServer
     .from("rooms")
@@ -28,7 +27,6 @@ export async function createNewDocumentAction() {
 
   const {
     data: document,
-    status: dStatus,
     error: dErr,
   } = await supabaseServer
     .from("documents")
@@ -41,9 +39,9 @@ export async function createNewDocumentAction() {
 
   const docId = document?.id;
 
-  const {status:roleStatus,error:roleError} = await supabaseServer
-  .from("document_roles")
-  .insert({doc_id:docId,user_id:userId,role:"owner"})
+  // const {status:roleStatus,error:roleError} = await supabaseServer
+  // .from("document_roles")
+  // .insert({doc_id:docId,user_id:userId,role:"owner"})
   
   return {
     docId,
