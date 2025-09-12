@@ -9,7 +9,6 @@ import {
 export function Threads({ editor }: { editor: any }) {
   const { threads } = useThreads({ query: { resolved: false } });
   if (!editor) return null;
-
   return (
     <>
       <div className="anchored-threads">
