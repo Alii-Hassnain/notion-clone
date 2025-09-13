@@ -14,8 +14,6 @@ import {
 import { resolveUsersSA, searchUsersSA } from "../../actions/userDirectory";
 import ShareDocument from "@/components/ShareDocument";
 
-
-
 function Who() {
   const others = useOthers();
   return <div>Online (not you): {others.length}</div>;
@@ -28,14 +26,11 @@ export function Room({id ,  children }: {id:string; children: ReactNode }) {
     <LiveblocksProvider authEndpoint="/api/liveblocks-auth"
       resolveUsers={async ({userIds}) =>{
         console.log("UserIds liveblocks =",userIds);
-        
         return await resolveUsersSA(userIds)
-
       }
     }
       resolveMentionSuggestions={async({text}) => {
         console.log(text);
-        
        return await searchUsersSA(text ?? "")
       }
       }

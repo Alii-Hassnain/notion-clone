@@ -10,9 +10,8 @@ export async function createNewDocumentAction() {
   const { status: uStatus, error: uErr } = await supabaseServer
     .from("users")
     .upsert({ id: userId, email }, { onConflict: "id" });
-
+    
   if (uErr) throw new Error(uErr.message);
-
   const {
     data: room,
     error: rErr,

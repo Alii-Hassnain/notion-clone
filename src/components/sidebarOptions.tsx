@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 // server actions
 import { getDocument } from "../../actions/documentActions";
-
+import { useQuery } from "@tanstack/react-query";
 type Role = "owner" | "editor"
 
 type Documents = {
@@ -14,22 +14,19 @@ type Documents = {
   title: string;
 };
 const SidebarOptions = () => {
-  const [gData, setGdata] = useState<Documents[]>([]);
   const pathName = usePathname();
-  const { user, isLoaded } = useUser(); // Add isLoaded to know when Clerk is ready
-  // const email = user?.emailAddresses[0]?.emailAddress;
+  const { user, isLoaded } = useUser(); 
   const userId = user?.id;
-  useEffect(()=>{
-     if (!isLoaded || !userId) return;
-    const fetchData = async () => {
-      if (!userId) throw new Error("id required");
-      const { data } = await getDocument(userId);
-      if (!data) return;
-      console.log(data);
-      setGdata(data);
-    };
-    fetchData();
-  },[userId,isLoaded])
+  if (!isLoaded || !userId) return;
+  if (!userId) throw new Error("id required");
+  const {data : gData} = useQuery<Documents[]>({
+    queryKey: ["documents"],
+    queryFn: async () =>{
+      const res = await getDocument(userId);
+      return res.data; 
+    }, 
+    enabled:isLoaded && !!userId,
+  }) 
   const ownerEditor = useMemo(()=>{
     if(!gData) return { owner:[], editor:[]};
     const groupedData = gData?.reduce<{

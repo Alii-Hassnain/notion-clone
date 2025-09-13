@@ -18,7 +18,6 @@ const ShareDocument = ({docId} : {docId:string}) => {
         const data = await findUserByEmail(email , docId);
         console.log("Inviting" , email);
         console.log(data);
-        
     }
   return (
     <div>
