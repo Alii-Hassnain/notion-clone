@@ -19,27 +19,25 @@ function Who() {
   return <div>Online (not you): {others.length}</div>;
 }
 
-export function Room({id ,  children }: {id:string; children: ReactNode }) {
- 
+export function Room({ id, children }: { id: string; children: ReactNode }) {
   return (
     // <LiveblocksProvider publicApiKey={"pk_dev_qD8od_v2TP-I-96KHxcy7p77SWjboojBzZpreI9q5v7_Gns_X1d0onPn1MR9Dpy-"}>
-    <LiveblocksProvider authEndpoint="/api/liveblocks-auth"
-      resolveUsers={async ({userIds}) =>{
-        console.log("UserIds liveblocks =",userIds);
-        return await resolveUsersSA(userIds)
-      }
-    }
-      resolveMentionSuggestions={async({text}) => {
+    <LiveblocksProvider
+      authEndpoint="/api/liveblocks-auth"
+      resolveUsers={async ({ userIds }) => {
+        console.log("UserIds liveblocks =", userIds);
+        return await resolveUsersSA(userIds);
+      }}
+      resolveMentionSuggestions={async ({ text }) => {
         console.log(text);
-       return await searchUsersSA(text ?? "")
-      }
-      }
+        return await searchUsersSA(text ?? "");
+      }}
     >
       <RoomProvider id={id}>
         <ClientSideSuspense fallback={<div>Keep patience ...</div>}>
           <div className="flex justify-between">
-            <Who /> 
-            <ShareDocument docId = {id}/>
+            <Who />
+            <ShareDocument docId={id} />
           </div>
           {children}
         </ClientSideSuspense>

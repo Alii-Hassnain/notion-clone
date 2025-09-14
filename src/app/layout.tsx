@@ -1,4 +1,3 @@
-
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -9,6 +8,7 @@ export const metadata: Metadata = {
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import ReactQueryProvider from "./reactQueryProviders";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
   children,
@@ -18,11 +18,14 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <ReactQueryProvider>
-          <Navbar />
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <div className="flex-1 p-4 bg-gray-100 overflow-y-auto scrollbar-hide">{children}</div>
-          </div>
+            <Navbar />
+            <div className="flex min-h-screen">
+              <Sidebar />
+              <Toaster />
+              <div className="flex-1 p-4 bg-gray-100 overflow-y-auto scrollbar-hide">
+                {children}
+              </div>
+            </div>
           </ReactQueryProvider>
         </body>
       </html>

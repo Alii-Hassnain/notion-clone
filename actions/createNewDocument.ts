@@ -38,9 +38,11 @@ export async function createNewDocumentAction() {
 
   const docId = document?.id;
 
-  // const {status:roleStatus,error:roleError} = await supabaseServer
-  // .from("document_roles")
-  // .insert({doc_id:docId,user_id:userId,role:"owner"})
+  const {status:roleStatus,error:roleError} = await supabaseServer
+  .from("document_roles")
+  .insert({doc_id:docId,user_id:userId,role:"owner"})
+
+  if(roleError) throw new Error("Not a doc")
   
   return {
     docId,

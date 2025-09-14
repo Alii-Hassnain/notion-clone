@@ -1,6 +1,4 @@
 "use server"
-
-
 import { clerkClient } from "@clerk/nextjs/server"
 
 export async function resolveUsersSA(userIds:string[]) {
@@ -27,13 +25,11 @@ export async function resolveUsersSA(userIds:string[]) {
     }
     return result;
 }
-
 export async function searchUsersSA(text : string) {
     const query = (text || "").trim();
     if(query === "") return [];
     const client = await clerkClient();
     const {data} = await client.users.getUserList({query});
-    
     const ids = data.map((u)=>{
         return u.id
     });

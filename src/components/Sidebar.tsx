@@ -1,7 +1,7 @@
 "use client";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu} from "lucide-react";
+import { Menu } from "lucide-react";
 import React from "react";
 import NewDocumentButton from "./NewDocumentButton";
 import SidebarOptions from "./sidebarOptions";
@@ -12,9 +12,9 @@ const Sidebar = () => {
       {/* my documents */}
       <NewDocumentButton />
       {/* list */}
-      <SidebarOptions/>
+      <SidebarOptions />
       {/* Share with me */}
-      {/* List */}  
+      {/* List */}
     </div>
   );
   return (
@@ -31,9 +31,7 @@ const Sidebar = () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className="hidden md:block p-8">  
-        {menuOptions}
-      </div>
+      <div className="hidden md:block p-8">{menuOptions}</div>
     </div>
   );
 };
