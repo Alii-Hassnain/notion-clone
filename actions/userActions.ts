@@ -10,7 +10,6 @@ export async function findUserByEmail(email: string , docId : string) {
     .eq("email", email.trim().toLowerCase())
     .single();
     if(userErr || !user) throw new Error(userErr?.message || "User not found")
-        console.log(user);
     const userId = user?.id;
     const {data:roleRows , error:roleErr}  = await supabaseServer
     .from("document_roles")

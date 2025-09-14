@@ -44,7 +44,6 @@ const SidebarOptions = () => {
         editor: [],
       }
     );
-    console.log(groupedData);
     return groupedData;
   }, [gData]);
   console.log(ownerEditor);

@@ -12,8 +12,6 @@ export async function getDocument(userId: string) {
     )
     .eq("document_roles.user_id", userId);
   if (error) throw new Error(error.message);
-  console.log(data);
-  console.log(data[0]);
   const transformed = data?.map((doc) => ({
     id: doc.id,
     title: doc.title,
@@ -34,7 +32,6 @@ export async function getDocumnetTitle(docId: string) {
     .eq("id", docId)
     .single();
   if (error) throw new Error(error.message);
-  console.log("single document data = ", data.title);
   return {
     title: data.title,
   };
