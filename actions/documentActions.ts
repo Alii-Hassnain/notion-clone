@@ -60,5 +60,5 @@ export async function deletedocument(docId: string, userId: string) {
     return { ok: false, error: error.message };
   }
   if (!data) return { ok: false, reason: "YOU ARE NOT OWNER OF THE DOC" };
-  return { ok: true };
+  return { ok: true , status:true};
 }
