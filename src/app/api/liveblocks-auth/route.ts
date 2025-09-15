@@ -1,17 +1,13 @@
 import { Liveblocks } from "@liveblocks/node";
 import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-
 const liveBlocksSecret = process.env.LIVE_BLOCK_KEY;
-
 if(!liveBlocksSecret){
     throw new Error("Missing Live blocks secret key");
 }
 const liveblocks = new Liveblocks({
     secret : liveBlocksSecret
 })
-
-
 export async function POST(){
     const user = await currentUser(); // null if signed out
     const userId = user?.id ?? "guest";
@@ -26,5 +22,6 @@ export async function POST(){
     session.allow("*", session.FULL_ACCESS);
     const {status , body} = await session.authorize();
     return new NextResponse(body , {status});
-
 }
+
+

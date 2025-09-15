@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Button } from "./ui/button";
 import { User } from "lucide-react";
@@ -23,9 +22,7 @@ const Navbar = () => {
         <div className="w-1/2" />
       )}
       <h1 className="absolute left-1/2 text-xl font-semibold">Notion clone</h1>
-
       {/* BreadCrumbs */}
-
       <div>
         <SignedOut>
           <SignInButton mode="modal">

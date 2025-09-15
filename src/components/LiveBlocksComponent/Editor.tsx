@@ -6,9 +6,6 @@ import {Threads} from "./Threads";
 
 export function Editor() {
   const editor = useCreateBlockNoteWithLiveblocks({});
-  
-  
-
   return (
     <div>
       <BlockNoteView editor={editor} className="editor" />
